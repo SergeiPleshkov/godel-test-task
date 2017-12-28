@@ -1,25 +1,49 @@
-.content {
+html {
     height: 100%;
+}
+
+body {
+    background: #cde5f8;
+}
+.content {
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-flow: column;
 }
 
 table {
-    margin-top: calc(50vh - 85px)
+    margin-top: calc(50vh - 157px)
 }
 
 td {
-    border: 1px solid black;
-    border-collapse: collapse;
-    width: 50px;
-    height: 50px;
+    width: 100px;
+    height: 100px;
     text-align: center;
     font-size: 20px;
     font-weight: bold;
-    background: #03afffab;
+    background: #1795f5da;
 }
 
 td:hover {
-    background: gold;
+    background: rgb(15, 3, 245);
+    color: white;
     cursor: pointer;
+    transition: .3s;
+}
+
+.empty {
+    background: none;
+}
+
+.empty:hover {
+    background: none;
+}
+
+.footer {
+    font-size: 10px;
+    text-align: right;
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }
