@@ -1,10 +1,33 @@
 'use strict';
 
 let gameState,
-    solvedState,
-    start;
+solvedState,
+start;
 
 renderStartScreen();
+
+document.addEventListener('click', (ev) => {
+    if (ev.target.tagName == 'TD') {
+        moveCell300(ev.target);
+        if (JSON.stringify(gameState) === JSON.stringify(solvedState)) {
+            let end = Date.now();
+            let playedSec = Math.round((end - start) / 1000);
+            let playedMin = Math.round(playedSec / 60);
+            setTimeout(() => {
+                if (confirm(`Ура! Вы решили головоломку за ${playedMin}:${playedSec % 60 < 10? '0'+ playedSec % 60 : playedSec % 60}!
+
+                        Сыграете ещё раз?`)) {
+                    renderStartScreen();
+                };
+            }, 0);
+        }
+    }
+    if (ev.target.className == 'startGameBtn') {
+        createInitialState(document.querySelector('.rows').value, document.querySelector('.cols').value);
+        renderTable(gameState);
+        start = Date.now();
+    }
+})
 
 function createInitialState(rows, cols) {
 
@@ -73,33 +96,44 @@ function moveCell(cell) {
     if (((Math.abs(thisCol - emptyCol) === 1) && (thisRow === emptyRow)) || ((Math.abs(thisRow - emptyRow) === 1) && (thisCol === emptyCol))) {
         cell.classList.toggle('fade-out');
         emptyCell.classList.toggle('fade-in');
-
-        setTimeout(()=>{gameState[emptyRow][emptyCol] = gameState[thisRow][thisCol];
-        gameState[thisRow][thisCol] = null;
-        emptyCell.classList.toggle('empty');
-        renderTable(gameState);}, 300)
+        
+        setTimeout(() => {
+            gameState[emptyRow][emptyCol] = gameState[thisRow][thisCol];
+            gameState[thisRow][thisCol] = null;
+            emptyCell.classList.toggle('empty');
+            renderTable(gameState);
+        }, 300)
     }
 }
 
-document.addEventListener('click', (ev) => {
-    if (ev.target.tagName == 'TD') {
-        moveCell(ev.target);
-        if (JSON.stringify(gameState) === JSON.stringify(solvedState)) {
-            let end = Date.now();
-            let playedSec = Math.round((end - start) / 1000);
-            let playedMin = Math.round(playedSec / 60);
-            setTimeout(() => {
-                if (confirm(`Ура! Вы решили головоломку за ${playedMin}:${playedSec % 60 < 10? '0'+ playedSec % 60 : playedSec % 60}!
+let moveCell300 = throttle(moveCell, 300);
 
-                        Сыграете ещё раз?`)) {
-                    renderStartScreen();
-                };
-            }, 0);
-        }
-    }
-    if (ev.target.className == 'startGameBtn') {
-        createInitialState(document.querySelector('.rows').value, document.querySelector('.cols').value);
-        renderTable(gameState);
-        start = Date.now();
-    }
-})
+function throttle(fun, delay) {
+
+	var isPaused = false,
+		savedArgs,
+		savedThis;
+
+	function wrapper() {
+
+		if (isPaused) {
+			savedArgs = arguments;
+			savedThis = this;
+			return;
+		}
+
+		fun.apply(this, arguments);
+
+		isPaused = true;
+
+		setTimeout(function () {
+			isPaused = false;
+			if (savedArgs) {
+				wrapper.apply(savedThis, savedArgs);
+				savedArgs = savedThis = null;
+			}
+		}, delay);
+	}
+
+	return wrapper;
+}
