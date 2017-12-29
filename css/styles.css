@@ -82,3 +82,7 @@ td:hover {
     flex-flow: column;
     justify-content: middle;
 }
+
+button, input[type="number"] {
+    margin-top: 10px;
+}
