@@ -90,8 +90,8 @@ function renderTable(state) {
 function renderStartScreen() {
     document.querySelector('.content').innerHTML = `
     <form class="start-screen">
-        <input type="number" min="3" max="10" class="rows" id="rows" value="3"><label for="rows">Высота</label>
-        <input type="number" min="3" max="10" class="cols" id="cols" value="3"><label for="cols">Ширина</label>
+        <label for="rows">Высота</label><input type="number" min="3" max="10" class="rows" id="rows" value="3">
+        <label for="cols">Ширина</label><input type="number" min="3" max="10" class="cols" id="cols" value="3">
         <button class="startGameBtn">Размешать через массив</button>
         <button class="startByRulesBtn">Размешать по правилам игры</button>
     </form>`
