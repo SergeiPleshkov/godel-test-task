@@ -3,14 +3,14 @@
 let gameState,
     solvedState,
     start,
-    moveCell300 = throttle(moveCell, 300);
+    moveCell300 = throttle(moveCell, 200);
 
 
 renderStartScreen();
 
 document.addEventListener('click', (ev) => {
     if (ev.target.tagName === 'TD') {
-        moveCell300(ev.target, 300);
+        moveCell300(ev.target, 200);
         if (JSON.stringify(gameState) === JSON.stringify(solvedState)) {
             let end = Date.now();
             let playedSec = Math.round((end - start) / 1000);
@@ -106,6 +106,7 @@ function moveCell(cell, timeout) {
 
     if (((Math.abs(thisCol - emptyCol) === 1) && (thisRow === emptyRow)) || ((Math.abs(thisRow - emptyRow) === 1) && (thisCol === emptyCol))) {
         cell.classList.toggle('fade-out');
+        emptyCell.innerHTML = cell.innerHTML;
         emptyCell.classList.toggle('fade-in');
         gameState[emptyRow][emptyCol] = gameState[thisRow][thisCol];
         gameState[thisRow][thisCol] = null;

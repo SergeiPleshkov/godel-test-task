@@ -38,6 +38,7 @@ td:hover {
 }
 
 .empty {
+    color: transparent;
     background: none;
 }
 
@@ -54,27 +55,18 @@ td:hover {
     right: 0;
 }
 
-@keyframes fadeIn {
-    to {
-        background: #8BC34A;
-        color: black;
-    }
-}
-
-@keyframes fadeOut {
-    to {
-        background: none;
-        color: transparent;
-    }
-}
-
-
 .fade-in {
-    animation: fadeIn .3s ease-in 1 forwards;
+    background: #8BC34A;
+    color: black;
+    border-radius: 0;
+    transition: .2s ease-in;
 }
 
 .fade-out {
-    animation: fadeOut .3s ease-out 1 forwards;
+    transition: .2s ease-out ;
+    background: #8BC34A;
+    color: black;
+    border-radius: 0;
 }
 
 .start-screen {
