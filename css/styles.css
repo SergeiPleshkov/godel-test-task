@@ -6,15 +6,15 @@ body {
     margin: 0;
     padding: 0;
     height: 100%;
-    background: #cde5f8;
+    background: #F1F8E9;
 }
+
 .content {
     height: 100%;
     display: flex;
     margin: auto;
     justify-content: center;
     align-items: center;
-    flex-flow: column;
 }
 
 table {
@@ -27,11 +27,11 @@ td {
     text-align: center;
     font-size: 20px;
     font-weight: bold;
-    background: #1795f5da;
+    background: #8BC34A;
 }
 
 td:hover {
-    background: rgb(15, 3, 245);
+    background: #33691E;
     color: white;
     cursor: pointer;
     transition: .3s;
@@ -43,6 +43,7 @@ td:hover {
 
 .empty:hover {
     background: none;
+    color: transparent;
 }
 
 .header {
@@ -53,14 +54,30 @@ td:hover {
     right: 0;
 }
 
-.just-moved {
-    background: silver !important;
-    transition: .3s;
-    transform: scale(0);
-    color: red;
+@keyframes fadeIn {
+    to {
+        background: #8BC34A;
+        color: black;
+    }
 }
 
-.startScreen {
+@keyframes fadeOut {
+    to {
+        background: none;
+        color: transparent;
+    }
+}
+
+
+.fade-in {
+    animation: fadeIn .3s ease-in 1 forwards;
+}
+
+.fade-out {
+    animation: fadeOut .3s ease-out 1 forwards;
+}
+
+.start-screen {
     display: flex;
     flex-flow: column;
     justify-content: middle;

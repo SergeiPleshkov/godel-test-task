@@ -3,6 +3,7 @@
 let gameState,
     solvedState,
     start;
+
 renderStartScreen();
 
 function createInitialState(rows, cols) {
@@ -25,7 +26,6 @@ function createInitialState(rows, cols) {
     let randomized = arr.sort(() => Math.random() - 0.5);
 
     gameState = new Array(rows);
-    console.log(gameState)
 
     for (let i = 0; i < rows; i++) {
         gameState[i] = new Array(cols);
@@ -33,7 +33,6 @@ function createInitialState(rows, cols) {
             gameState[i][j] = randomized[i * cols + j]
         }
     }
-    console.log(gameState, arr, randomized);
 }
 
 function renderTable(state) {
@@ -57,11 +56,11 @@ function renderTable(state) {
 
 function renderStartScreen() {
     document.querySelector('.content').innerHTML = `
-    <div class="startScreen">
+    <form class="start-screen">
         <input type="number" min="3" max="10" class="rows" id="rows" value="3"><span>Высота</span>
         <input type="number" min="3" max="10" class="cols" id="cols" value="3"><span>Ширина</span>
         <button class="startGameBtn">Начать игру</button>
-    </div>`
+    </form>`
 }
 
 function moveCell(cell) {
@@ -72,9 +71,13 @@ function moveCell(cell) {
         emptyCol = emptyCell.id.slice(-1);
 
     if (((Math.abs(thisCol - emptyCol) === 1) && (thisRow === emptyRow)) || ((Math.abs(thisRow - emptyRow) === 1) && (thisCol === emptyCol))) {
-        gameState[emptyRow][emptyCol] = gameState[thisRow][thisCol];
+        cell.classList.toggle('fade-out');
+        emptyCell.classList.toggle('fade-in');
+
+        setTimeout(()=>{gameState[emptyRow][emptyCol] = gameState[thisRow][thisCol];
         gameState[thisRow][thisCol] = null;
-        renderTable(gameState);
+        emptyCell.classList.toggle('empty');
+        renderTable(gameState);}, 300)
     }
 }
 
