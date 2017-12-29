@@ -15,13 +15,7 @@ document.addEventListener('click', (ev) => {
             let end = Date.now();
             let playedSec = Math.round((end - start) / 1000);
             let playedMin = Math.round(playedSec / 60);
-            setTimeout(() => {
-                if (confirm(`Ура! Вы решили головоломку за ${playedMin}:${playedSec % 60 < 10? '0'+ playedSec % 60 : playedSec % 60}!
-
-                        Сыграете ещё раз?`)) {
-                    renderStartScreen();
-                };
-            }, 0);
+            alert(`Ура! Вы решили головоломку за ${playedMin}:${playedSec % 60 < 10? '0'+ playedSec % 60 : playedSec % 60}!`);
         }
     }
     if (ev.target.className === 'startGameBtn') {

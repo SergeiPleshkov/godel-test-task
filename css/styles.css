@@ -1,5 +1,14 @@
+@font-face {
+    font-family: Open-Sans;
+    src: url(../fonts/OpenSans-Regular.ttf);
+}
+
 html {
     height: 100%;
+}
+
+*:focus {
+    outline: none;
 }
 
 body {
@@ -7,6 +16,7 @@ body {
     padding: 0;
     height: 100%;
     background: #F1F8E9;
+    font-family: Open-Sans;
 }
 
 .content {
@@ -22,6 +32,7 @@ table {
 }
 
 td {
+    color: rgb(55, 55, 55);
     width: 55px;
     height: 55px;
     text-align: center;
@@ -30,7 +41,8 @@ td {
     background: #8BC34A;
 }
 
-td:hover, button:hover {
+td:hover,
+button:hover {
     background: #33691E;
     color: white;
     cursor: pointer;
@@ -63,7 +75,7 @@ td:hover, button:hover {
 }
 
 .fade-out {
-    transition: .2s ease-out ;
+    transition: .2s ease-out;
     background: none;
     color: transparent;
 }
@@ -74,23 +86,33 @@ td:hover, button:hover {
     justify-content: middle;
 }
 
-button, input[type="number"], label {
+button,
+input[type="number"],
+label {
     margin-top: 10px;
     border: none;
     transition: .3s linear;
 }
 
-label {
-    text-align: center;
+input[type="number"] {
+    height: 30px;
+    padding: 1px 10px;
+    border: 1px solid #8BC34A;
 }
 
-button:hover, input:hover {
-    box-shadow: gray 0px 2px 3px 1px;
+label {
+    color: #444;
+    text-align: center;
+    text-transform: uppercase;
 }
 
 button {
+    margin-top: 15px;
+    color: rgb(55, 55, 55);
     background: #8BC34A;
-    height: 25px;
+    padding: 13px;
     line-height: 100%;
     font-weight: bold;
+    font-size: 14px;
+    text-transform: uppercase;
 }
