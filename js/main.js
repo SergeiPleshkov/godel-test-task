@@ -10,13 +10,7 @@ renderStartScreen();
 
 document.addEventListener('click', (ev) => {
     if (ev.target.tagName === 'TD') {
-        moveCell300(ev.target, 200);
-        if (JSON.stringify(gameState) === JSON.stringify(solvedState)) {
-            let end = Date.now();
-            let playedSec = Math.round((end - start) / 1000);
-            let playedMin = Math.round(playedSec / 60);
-            alert(`Ура! Вы решили головоломку за ${playedMin}:${playedSec % 60 < 10? '0'+ playedSec % 60 : playedSec % 60}!`);
-        }
+        moveCell300(ev.target, 300);
     }
     if (ev.target.className === 'startGameBtn') {
         createInitialState(document.querySelector('.rows').value, document.querySelector('.cols').value, true);
@@ -79,6 +73,22 @@ function renderTable(state) {
     table += '</table>';
     document.querySelector('.content').innerHTML += table;
     gameState = newState.slice()
+    setTimeout(() => {
+        checkSolvedAndPlayAgain();
+    }, 300)
+}
+
+function checkSolvedAndPlayAgain() {
+    if (JSON.stringify(gameState) === JSON.stringify(solvedState)) {
+        let end = Date.now();
+        let playedSec = Math.round((end - start) / 1000);
+        let playedMin = Math.round(playedSec / 60);
+        if (confirm(`Ура! Вы решили головоломку за ${playedMin}:${playedSec % 60 < 10? '0'+ playedSec % 60 : playedSec % 60}!
+        
+        Хотите сыграть ещё?`)) {
+            renderStartScreen();
+        }
+    }
 }
 
 function renderStartScreen() {
@@ -145,6 +155,8 @@ function throttle(fun, delay) {
 }
 
 function randomizeByRules(iterations) {
+    console.log(iterations)
+    if (!iterations) renderStartScreen();
     for (let i = 0; i < iterations; i++) {
         let emptyCell = document.querySelector('.empty'),
             emptyRow = +emptyCell.id.slice(-2, -1),
